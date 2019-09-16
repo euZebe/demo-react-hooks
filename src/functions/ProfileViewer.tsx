@@ -12,6 +12,7 @@ const ProfileViewer = ({ username }: ProfileViewerProps) => {
 
   return profile ? (
     <>
+      <h2>functional component</h2>
       <h3>{profile.name}</h3>
       <h4>{profile.location}</h4>
       <p>
