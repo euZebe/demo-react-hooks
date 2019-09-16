@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-
-interface ProfileViewerProps {
-  username: string;
-}
+import { ProfileViewerProps } from "../model/ProfileViewer.model";
 
 class ProfileViewerState {
   profile: any;
@@ -28,7 +25,7 @@ class ProfileViewer extends Component<ProfileViewerProps, ProfileViewerState> {
         <p>
           <a href={profile.blog}>blog</a>
         </p>
-        <img src={profile.avatar_url} height="200px" />
+        <img alt="avatar" src={profile.avatar_url} height="200px" />
       </>
     ) : (
       <h4>Loading...</h4>

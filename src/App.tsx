@@ -1,10 +1,12 @@
 import React from "react";
-import ProfileViewer from "./classes/ProfileViewer";
+import ProfileViewerAsClass from "./classes/ProfileViewer";
+import ProfileViewerAsFunction from "./functions/ProfileViewer";
 
 const App: React.FC = () => {
   return (
     <div>
-      <ProfileViewer username="kentcdodds"/>
+      <ProfileViewerAsClass username="kentcdodds" />
+      <ProfileViewerAsFunction username="kentcdodds" />
     </div>
   );
 };
