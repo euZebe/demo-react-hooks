@@ -1,21 +1,23 @@
 import React, { Component } from "react";
-import {
-  ProfileViewerProps,
-  GithubProfile
-} from "../model/ProfileViewer.model";
+import { ProfileViewerProps } from "../model/ProfileViewer.model";
+import GithubProfileRenderProp from "./GithubProfileRenderProp";
 
-class ProfileViewer extends Component<GithubProfile> {
+class ProfileViewer extends Component<ProfileViewerProps> {
   render() {
-    const { profile } = this.props;
+    const { username } = this.props;
     return (
-      <>
-        <h3>{profile.name}</h3>
-        <h4>{profile.location}</h4>
-        <p>
-          <a href={profile.blog}>blog</a>
-        </p>
-        <img alt="avatar" src={profile.avatar_url} height="200px" />
-      </>
+      <GithubProfileRenderProp username={username}>
+        {(profile: any) => (
+          <>
+            <h3>{profile.name}</h3>
+            <h4>{profile.location}</h4>
+            <p>
+              <a href={profile.blog}>blog</a>
+            </p>
+            <img alt="avatar" src={profile.avatar_url} height="200px" />
+          </>
+        )}
+      </GithubProfileRenderProp>
     );
   }
 }
