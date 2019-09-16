@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { ProfileViewerProps } from "../model/ProfileViewer.model";
+import React from "react";
+import { GithubProfile } from "../model/ProfileViewer.model";
 
-const ProfileViewer = ({ username }: ProfileViewerProps) => {
-  const [profile, setProfile] = useState();
-
-  useEffect(() => {
-    fetch(`https://api.github.com/users/${username}`)
-      .then(response => response.json())
-      .then(setProfile);
-  }, []);
-
-  return profile ? (
+const ProfileViewer = ({ profile }: GithubProfile) => {
+  return (
     <>
       <h2>functional component</h2>
       <h3>{profile.name}</h3>
@@ -20,8 +12,6 @@ const ProfileViewer = ({ username }: ProfileViewerProps) => {
       </p>
       <img alt="avatar" src={profile.avatar_url} height="200px" />
     </>
-  ) : (
-    <h4>Loading...</h4>
   );
 };
 
