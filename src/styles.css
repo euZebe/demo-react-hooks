@@ -6,3 +6,10 @@ html {
 h2 {
   color: red;
 }
+
+.error {
+  border: 1px solid red;
+  background-color: #f4a7a7;
+  border-radius: 1rem;
+  padding: 0 1rem;
+}

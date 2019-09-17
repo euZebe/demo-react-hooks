@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <>
       <ProfileViewerAsClass username="kentcdodds" />
-      <ProfileViewerAsFunction username="kentcdodds" />
+      <ProfileViewerAsFunction username="kentcdoddssqdqsdsqd" />
     </>
   );
 };

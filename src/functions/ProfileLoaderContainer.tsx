@@ -1,26 +1,47 @@
 import React, { useEffect, useState } from "react";
-import {
-  GithubProfile,
-  ProfileViewerProps
-} from "../model/ProfileViewer.model";
+import { ProfileViewerProps } from "../model/ProfileViewer.model";
 import ProfileViewer from "./ProfileViewer";
 
 // declare a custom hook
-function useGithubProfile(username: string) {
+export function useGithubProfile(username: string) {
   const [profile, setProfile] = useState();
-  useEffect(() => {
-    fetch(`https://api.github.com/users/${username}`)
-      .then(response => response.json())
-      .then(setProfile);
-  }, []);
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
-  return profile;
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        setLoading(false);
+        return response.json();
+      })
+      .then(setProfile)
+      .catch(error => {
+        console.error("an error occured while fetching user details", error);
+        setError(error.message);
+        setLoading(false);
+      });
+  }, [username]);
+
+  return [profile, loading, error];
 }
 
 const ProfileLoaderContainer = ({ username }: ProfileViewerProps) => {
-  const profile = useGithubProfile(username);
+  const [profile, loading, error] = useGithubProfile(username);
 
-  return profile ? <ProfileViewer profile={profile} /> : <h4>Loading...</h4>;
+  if (error)
+    return (
+      <div className="error">
+        <h5>An error occured while fetching profile {username}</h5>
+        <p>{error}</p>
+      </div>
+    );
+
+  if (loading) return <h4>Loading...</h4>;
+  return profile ? <ProfileViewer profile={profile} /> : null;
 };
 
 export default ProfileLoaderContainer;

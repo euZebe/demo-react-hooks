@@ -22,10 +22,10 @@ class GithubProfileRenderProp extends React.Component<Props, GithubProfile> {
   render() {
     const { profile } = this.state;
     return profile ? (
-      <>
+      <div>
         <h2>with render prop</h2>
         {this.props.children(profile)}
-      </>
+      </div>
     ) : (
       <h4>Loading...</h4>
     );
